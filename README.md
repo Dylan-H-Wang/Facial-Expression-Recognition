@@ -4,7 +4,121 @@ This project implements the method described in this [report](https://arxiv.org/
 
 ## Demo
 
-tbc
+### Dependencies
+To make the program running, you need to make sure following packages are installed in your environment. All of them can be installed using `pip`.
+
+* `pytorch`: deep learning framework.
+* `sklearn`: machine learning framework.
+* `opencv`: machine learning framework.
+* `PIL`: Process images.
+* `matplotlib`: Plot training process.
+* `numpy`: process data.
+* `pandas`: process data.
+* `h5py`: manage file I/O.
+* `torchfile`: manage `torch(lua)` file in `pytorch`.
+* `tqdm`: progress bar.
+
+### Usage
+
+#### Download code and data files
+
+You can go to [release](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/releases) page to download the coding and all of data files.
+
+In the `models` package, it contains pre-trained `vgg_face` and `vgg_f` models, and our models including `vgg_face_no_dsd`, `vgg_f_no_dsd`, `vgg_13_no_dsd` and `kmeans`.
+
+In the `data` package, it contains dataset `train`, `validation` and `test`, and the rest is used to train handcraft model, since the data is too big to fit into RAM, you have to save it in the disk to conduct the training.
+
+Make sure the `data` and `models` packages are in the same level of other python files. e.g.
+```
+|____Facial-Expression-Recognition
+     |_____models
+           |_____ model files...
+           
+     |_____data
+           |_____ data files ...
+           
+     |_____python files
+```
+
+#### Run the code
+
+To run the code, you can use flag `--mode` or `-m` to specify which function you want to test. There are two modes `demo` and `train`. 
+
+If you choose `train` mode, it will train the model fram scratch. 
+
+If you choose `demo` mode, it will show the accuracy of trained models including `vgg_face`, `vgg_f` and `vgg_13`. The training process including training loss, val loss and val accuracy will be saved as `vgg_face_process.png`, `vgg_f_process.png` and `vgg_13_process.png` in the current folder. Also, it will pick three images from the testing dataset and make predictions. Picked images will be saved as `test_sample_0.png`, `test_sample_1.png` and `test_sample_3.png` in the current folder. The `demo` mode is set by default.
+
+Example command line input:
+
+```
+python main.py -m demo
+```
+
+Example output:
+```
+------ demo mode ------
+Display testing accuracy of each model:
+Preparing test dataset ...
+test dataset contains 3589 samples
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 29/29 [00:13<00:00,  2.14it/s]
+Finish vgg_face model test with accuracy 0.6959
+Preparing test dataset ...
+test dataset contains 3589 samples
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:01<00:00, 11.24it/s]
+Finish vgg_f model test with accuracy 0.6120
+Preparing test dataset ...
+test dataset contains 3589 samples
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [00:01<00:00,  5.40it/s]
+Finish vgg_13 model test with accuracy 0.6324
+
+Saving deep model training process ...
+
+Selecting 3 images from testing set
+Preparing test dataset ...
+test dataset contains 3589 samples
+Preparing test dataset ...
+test dataset contains 3589 samples
+Making prediction ...
+
+ Labels: 0=Angry, 1=Disgust, 2=Fear, 3=Happy, 4=Sad, 5=Surprise, 6=Neutral
+
+Object: test_sample_0.jpg
+Ground truth: 0
+vgg_face: 0; vgg_f: 0; vgg_13: 0
+------
+
+Object: test_sample_1.jpg
+Ground truth: 4
+vgg_face: 4; vgg_f: 6; vgg_13: 6
+------
+
+Object: test_sample_2.jpg
+Ground truth: 2
+vgg_face: 0; vgg_f: 4; vgg_13: 6
+------
+```
+
+Training process
+
+![vgg_face_train](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/blob/master/vgg_face_process.png)
+![vgg_f_train](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/blob/master/vgg_f_process.png)
+![vgg_13_train](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/blob/master/vgg_13_process.png)
+
+Test images
+
+![sample_1](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/blob/master/test_sample_0.png)
+![sample_2](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/blob/master/test_sample_1.png)
+![sample_3](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/blob/master/test_sample_2.png)
+
+### Results
+
+Since the dataset is augmented by random horizontally flip, the result may vary a bit.
+
+| Models   | Accuracy |
+|----------|----------|
+| vgg_face | 0.69     |
+| vgg_f    | 0.64     |
+| vgg_13   | 0.65     |
 
 ## `dataset.py`
 
@@ -59,5 +173,3 @@ This file implements methods which can be used for extracting image features and
 Rest of methods functions explicitly as their names.
 
 **Note:** During the deep model training process, we found that `DSD` training process does not work as good as what we expect. Thus, we only perform the first dense phase which is just regular train process.
-
-## `main.py`
