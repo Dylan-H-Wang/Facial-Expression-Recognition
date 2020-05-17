@@ -268,7 +268,7 @@ def train_vgg_face(data_train, data_val):
 
 
 def test_vgg_face(imgs=None):
-    check = torch.load("./models/vgg_face_no_dsd.pth")
+    check = torch.load("./models/vgg_face_no_dsd.pth", map_location=DEVICE)
     model = deep_model.VggFace()
 
     model.fc_8 = nn.Linear(model.fc_8.in_features, 7)
@@ -529,7 +529,7 @@ def train_vgg_f(data_train, data_val):
 
 
 def test_vgg_f(imgs=None):
-    check = torch.load("./models/vgg_f_no_dsd.pth")
+    check = torch.load("./models/vgg_f_no_dsd.pth", map_location=DEVICE)
     model = deep_model.Vggf(pretrain=False)
 
     model.fc8 = nn.Linear(model.fc8.in_features, 7)
@@ -662,7 +662,7 @@ def train_vgg_13(data_train, data_val):
 
 
 def test_vgg_13(imgs=None):
-    check = torch.load("./models/vgg_13_no_dsd.pth")
+    check = torch.load("./models/vgg_13_no_dsd.pth", map_location=DEVICE)
     model = deep_model.Vgg13()
 
     model = model.to(DEVICE)

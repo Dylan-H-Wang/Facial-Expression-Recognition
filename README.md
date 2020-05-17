@@ -4,12 +4,17 @@ This project implements the method described in this [report](https://arxiv.org/
 
 ## Demo
 
+### Demo video
+
+You can check our demo [video](https://youtu.be/lhVLyoJdT7c) at around 2:16 for better illustration.
+
 ### Dependencies
+
 To make the program running, you need to make sure following packages are installed in your environment. All of them can be installed using `pip`.
 
 * `pytorch`: deep learning framework.
 * `sklearn`: machine learning framework.
-* `opencv`: machine learning framework.
+* `opencv`: machine learning framework. In order to calculate dense SIFT, please install this [non-free version](https://pypi.org/project/opencv-python-nonfree/)
 * `PIL`: Process images.
 * `matplotlib`: Plot training process.
 * `numpy`: process data.
@@ -22,7 +27,7 @@ To make the program running, you need to make sure following packages are instal
 
 #### Download code and data files
 
-You can go to [release](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/releases) page to download the coding and all of data files.
+You can go to [release](https://github.com/Dylan-H-Wang/Facial-Expression-Recognition/releases) page to download the source code and all of data files. If the download speed is slow, you can try command line tool using `wget`.
 
 In the `models` package, it contains pre-trained `vgg_face` and `vgg_f` models, and our models including `vgg_face_no_dsd`, `vgg_f_no_dsd`, `vgg_13_no_dsd` and `kmeans`.
 

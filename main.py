@@ -31,7 +31,7 @@ if args.mode == "demo":
 	train.test_deep_model()
 
 	print("\nSaving deep model training process ...")
-	checkpoint = torch.load("./models/vgg_face_no_dsd.pth")
+	checkpoint = torch.load("./models/vgg_face_no_dsd.pth", map_location='cuda:0')
 	train_loss = checkpoint["train_loss"]
 	val_loss = checkpoint["val_loss"]
 	val_acc = checkpoint["val_acc"]
@@ -46,7 +46,7 @@ if args.mode == "demo":
 	plt.grid()
 	fig.savefig("./vgg_face_process.png")
 
-	checkpoint = torch.load("./models/vgg_f_no_dsd.pth")
+	checkpoint = torch.load("./models/vgg_f_no_dsd.pth", map_location='cuda:0')
 	train_loss = checkpoint["train_loss"]
 	val_loss = checkpoint["val_loss"]
 	val_acc = checkpoint["val_acc"]
@@ -61,7 +61,7 @@ if args.mode == "demo":
 	plt.grid()
 	fig.savefig("./vgg_f_process.png")
 
-	checkpoint = torch.load("./models/vgg_13_no_dsd.pth")
+	checkpoint = torch.load("./models/vgg_13_no_dsd.pth", map_location='cuda:0')
 	train_loss = checkpoint["train_loss"]
 	val_loss = checkpoint["val_loss"]
 	val_acc = checkpoint["val_acc"]
