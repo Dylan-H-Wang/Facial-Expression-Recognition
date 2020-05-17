@@ -112,7 +112,12 @@ Test images
 
 ### Results
 
-Since the dataset is augmented by random horizontally flip, the result may vary a bit.
+Since the dataset is augmented by random horizontally flip, the result may vary a bit. 
+
+The result of combining deep model and handcraft model is not shown here, due to several reasons: 
+1. The inputs of handcraft model are extremely large (the input shape is 28,709 x 210,000). Since this model can only be trained on CPU and large data fitted in RAM can crash the program, we have to save all input files on disk first and split the data into several batches which results in the overhead of dealing with file I/O. 
+2. The local SVM learning algorithm needs to find 200 nearest training sample for each test sample, and this is not a good choice if we want to make real-time predictions. 
+3. The result of combining deep model features and handcraft model features and feeding into SVM with local learning algorithm is not as good as the deep model. But we still remains this part in the source code and you can use data in the `data` folder to check the result. 
 
 | Models   | Accuracy |
 |----------|----------|
